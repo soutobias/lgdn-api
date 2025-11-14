@@ -5,7 +5,6 @@ async def get_weather_data(lon: float, lat: float) -> dict:
     """Get current weather conditions for a given latitude and longitude."""
     try:
         async with httpx.AsyncClient() as client:
-            # Open-Meteo API - free weather API
             url = "https://api.open-meteo.com/v1/forecast"
             params = {
                 "latitude": lat,
@@ -21,5 +20,5 @@ async def get_weather_data(lon: float, lat: float) -> dict:
             data = response.json()
             return data.get("current_weather", {})
 
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         return {"error": str(e)}
